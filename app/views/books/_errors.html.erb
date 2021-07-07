@@ -1,0 +1,10 @@
+<% if book.errors.any? %>
+  <div class="alert alert-danger">
+    The form contains <%= pluralize(book.errors.count, "error") %>.
+  </div>
+  <ul>
+    <% book.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+ <% end %>
