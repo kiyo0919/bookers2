@@ -6,7 +6,7 @@ describe '[STEP4] いいねとコメントのテスト' do
   let!(:book) { create(:book, user: user) }
   let!(:other_book) { create(:book, user: other_user) }
   let!(:user_book_comment) { create(:book_comment, book: book, user: user) }
-  let!(:user_other_favorite) { create(:favorite, book: other_book, user: user) }  # 削除テスト用に、他人の投稿に対して自分がいいねを作成
+  let!(:user_other_favorite) { create(:favorite, book: other_book, user: user) } # 削除テスト用に、他人の投稿に対して自分がいいねを作成
   let!(:other_user_book_comment) { create(:book_comment, book: book, user: other_user) }
 
   before do
@@ -20,6 +20,7 @@ describe '[STEP4] いいねとコメントのテスト' do
     before do
       visit books_path
     end
+
     context '表示の確認' do
       it 'いいねボタンのハートアイコンが表示される' do
         expect(page).to have_selector('.fa-heart')
@@ -33,6 +34,7 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_content other_book.book_comments.count
       end
     end
+
     context 'いいね作成機能のテスト' do
       it '自分のいいねが正しく保存される' do
         expect { click_link '', href: book_favorites_path(book) }.to change(user.favorites, :count).by(1)
@@ -46,6 +48,7 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_content book.favorites.count
       end
     end
+
     context 'いいね削除機能のテスト' do
       it '自分のいいねが正しく削除される' do
         expect { click_link '', href: book_favorites_path(other_book) }.to change(user.favorites, :count).by(-1)
@@ -65,6 +68,7 @@ describe '[STEP4] いいねとコメントのテスト' do
     before do
       visit book_path(book)
     end
+
     context '表示の確認' do
       it 'いいねボタンのハートアイコンが表示される' do
         expect(page).to have_selector('.fa-heart')
@@ -99,6 +103,7 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_button '送信'
       end
     end
+
     context 'いいね機能のテスト' do
       it '自分のいいねが正しく保存される' do
         expect { click_link '', href: book_favorites_path(book) }.to change(user.favorites, :count).by(1)
@@ -112,11 +117,13 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_content book.favorites.count
       end
     end
+
     context 'コメント追加機能のテスト' do
       before do
         @comment = Faker::Lorem.characters(number: 10)
         fill_in 'book_comment[comment]', with: @comment
       end
+
       it '自分のコメントが正しく保存される' do
         expect { click_button '送信' }.to change(user.book_comments, :count).by(1)
       end
@@ -134,11 +141,13 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_link 'Destroy', href: book_book_comment_path(book_id: book.id, id: user.book_comments.last.id)
       end
     end
+
     context 'コメント削除機能のテスト' do
       before do
         @destroy_link = book_book_comment_path(book_id: book.id, id: user_book_comment.id)
         @destroyed_comment = user_book_comment.comment
       end
+
       it '自分のコメントが正しく削除される' do
         expect { click_link 'Destroy', href: @destroy_link }.to change(user.book_comments, :count).by(-1)
       end
@@ -161,6 +170,7 @@ describe '[STEP4] いいねとコメントのテスト' do
     before do
       visit user_path(user)
     end
+
     context '表示の確認' do
       it 'いいねボタンのハートアイコンが表示される' do
         expect(page).to have_selector('.fa-heart')
@@ -172,6 +182,7 @@ describe '[STEP4] いいねとコメントのテスト' do
         expect(page).to have_content book.book_comments.count
       end
     end
+
     context 'いいね作成機能のテスト' do
       it '自分のいいねが正しく保存される' do
         expect { click_link '', href: book_favorites_path(book) }.to change(user.favorites, :count).by(1)

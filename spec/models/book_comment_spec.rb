@@ -22,6 +22,7 @@ RSpec.describe 'BookCommentモデルのテスト', type: :model do
         expect(BookComment.reflect_on_association(:book).macro).to eq :belongs_to
       end
     end
+
     context 'Userモデルとの関係' do
       it 'N:1となっている' do
         expect(BookComment.reflect_on_association(:user).macro).to eq :belongs_to
