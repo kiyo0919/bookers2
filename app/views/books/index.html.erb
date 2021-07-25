@@ -1,11 +1,11 @@
 <main>
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 col-xs-12">
         <%= render "/books/errors", book: @book %>
         <%= render 'users/userinfo', user: @user, book: @book %>
       </div>
-      <div class="col-md-8 offset-md-1">
+      <div class="col-md-8 offset-md-1 col-xs-12">
         <h2>Books</h2>
         <table class="table table-hover table-inverse">
         <thead>
