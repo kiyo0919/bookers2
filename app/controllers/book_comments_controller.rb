@@ -1,6 +1,6 @@
 class BookCommentsController < ApplicationController
   def create
-    book = Book.find(params[:book_id])
+    book = Book.find(params[:book_id])#ビューのlink_toで指定してるURLの引数に特定のbookを指定している。従って、ルーティングでネストされているからbook_idには特定のbookのidが入っている。ネストはrails routesで確認できる。
     comment = BookComment.new(book_comment_params)
     comment.user_id = current_user.id
     comment.book_id = book.id
