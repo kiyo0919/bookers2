@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-md-3 col-xs-12">
         <%= render "/books/errors", book: @book %>
+        <!--エラー文の部分テンプレート-->
         <%= render '/users/userinfo', user: @user, book: @book %>
       </div>
       <div class="col-md-8 offset-md-1 col-xs-12">
@@ -48,5 +49,5 @@
         </tbody>
       </table>
     </div>
-  </div>     
+  </div>
 </main>
